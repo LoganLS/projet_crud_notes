@@ -9,6 +9,8 @@
   "author": "Logan LE SAUX",
   "license": "ISC",
   "dependencies": {
-    "@hapi/hapi": "^19.1.1"
+    "@hapi/hapi": "^19.1.1",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
   }
 }
