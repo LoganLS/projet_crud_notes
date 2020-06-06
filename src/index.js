@@ -1,12 +1,22 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
-//const Joi = require('@hapi/joi');
-//const Qs=require('qs');
 
 const mysql = require('mysql');
 
 const postRoute = require("../routes/postRoute");
+
+var express = require('express');
+
+const app=express();
+/*
+var keycloak = require('keycloak-js');
+
+let initOptions={
+    url: 'http://localhost:8080/auth', realm: 'keycloak-notes', client: 'vue-test-app', onLoad: 'login-required'
+};
+
+let keycloak_options=Keycloak(initOptions);*/
 
 const init = async () => {
 
@@ -18,20 +28,21 @@ const init = async () => {
         }*/
     });
 
-    var connection = mysql.createConnection({
+    var connection = mysql.createPool({
+        database:'projet_notes',
         host:'localhost',
         user:'root',
         password:'',
-        database:'projet_notes'
+        connectionLimit: 10
     });
 
-    connection.connect((err)=>{
+    /*connection.connect((err)=>{
         if(!err){
             console.log('DB connection succeeded');
         }else{
             console.log('DB connection failed \nErreur : '+JSON.stringify(err,undefined,2));
         }
-    });
+    });*/
 
     postRoute(server,connection);
 
